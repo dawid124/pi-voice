@@ -1,0 +1,72 @@
+services:
+#  rhasspy:
+##    build:
+##      context: .
+##      dockerfile: Dockerfile
+#    image: rhasspy/rhasspy
+#    restart: unless-stopped
+#    volumes:
+#      - ./rhasspy/profiles/:/profiles/
+#      - /etc/localtime:/etc/localtime:ro
+#    ports:
+#      - 12101:12101
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
+#      - "pi-master.local:192.168.0.40"
+#    devices:
+#      - /dev/snd:/dev/snd
+#    command: --user-profiles /profiles --profile pl -- --log-level error
+
+  openwakeword:
+#    platform: linux/arm64
+    build:
+      context: ./openWakeWord
+      dockerfile: Dockerfile
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "pi-master.local:192.168.0.40"
+    network_mode: "host"
+    ports:
+      - 12202:12202/udp
+      - 12203:12203/udp
+      - 12204:12204/udp
+    volumes:
+      - ./openWakeWord/models/:/usr/local/lib/python3.10/site-packages/openwakeword/resources/models/
+      - ./openWakeWord/config.yaml:/config/config.yaml
+      - ./openWakeWord/other-models/:/other-models/
+      - ./detect.py:/detect.py
+
+#  mary-piper:
+#    image: peteh/mary-piper:latest
+#    build:
+#      context: ./mary-piper
+#      dockerfile: Dockerfile
+#    container_name: mary-piper
+#    ports:
+#      - 59125:59125
+#    restart: unless-stopped
+#    volumes:
+#      - ./data/:/cache_voices/
+#      - ./custom/:/custom_voices/
+
+#  ai-assistant:
+#    build:
+#      context: ./ai-assistant
+#      dockerfile: Dockerfile
+#    container_name: ai-assistant
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
+#      - "pi-master:192.168.0.40"
+#    ports:
+#      - 3000:3000
+#    restart: unless-stopped
+#    volumes:
+#      - ./ai-assistant/:/app/
+#      - ./rhasspy/profiles/pl/ai-assistant/:/app-data/
+##    command: tail -F anything
+#    command: bun run src/app.ts
+
+
+
+# pscp -r .\ pi@pi-voice:/home/pi/pi-voice

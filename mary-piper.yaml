@@ -1,0 +1,13 @@
+services:
+  mary-piper:
+    image: peteh/mary-piper:latest
+    build:
+      context: ./mary-piper
+      dockerfile: Dockerfile
+    container_name: mary-piper
+    ports:
+      - 59125:59125
+    restart: unless-stopped
+    volumes:
+      - ./data/:/cache_voices/
+      - ./custom/:/custom_voices/

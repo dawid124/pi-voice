@@ -1,0 +1,121 @@
+{
+    "command": {
+        "webrtcvad": {
+            "before_sec": "0.5",
+            "current_energy_threshold": "5",
+            "max_sec": "5",
+            "min_sec": "2",
+            "silence_method": "vad_and_current",
+            "silence_sec": "1",
+            "speech_sec": "0.2",
+            "vad_mode": "1"
+        }
+    },
+    "dialogue": {
+        "satellite_site_ids": "pi-voice,mobile,office,bedroom",
+        "system": "rhasspy",
+        "volume": "0.5"
+    },
+    "handle": {
+        "remote": {
+            "url": "http://pi-master:8080/io-engine/voice"
+        },
+        "satellite_site_ids": "pi-voice,mobile,p-office,bedroom",
+        "system": "remote"
+    },
+    "intent": {
+        "fuzzy": true,
+        "ignore_unknown_words": true,
+        "satellite_site_ids": "pi-voice,mobile,office",
+        "system": "hermes"
+    },
+    "microphone": {
+        "pyaudio": {
+            "device": "1",
+            "siteId": "mobile,office,bedroom",
+            "udp_audio_host": "host.docker.internal",
+            "udp_audio_port": "12202"
+        },
+        "system": "pyaudio"
+    },
+    "mqtt": {
+        "enabled": "true",
+        "host": "pi-master.local",
+        "site_id": "floor1"
+    },
+    "sounds": {
+        "aplay": {
+            "device": "default:CARD=USB"
+        },
+        "error": "/usr/lib/rhasspy/etc/wav/beep_error.wav",
+        "recorded": "",
+        "system": "aplay",
+        "wake": "/usr/lib/rhasspy/etc/wav/beep_hi.wav"
+    },
+    "speech_to_text": {
+        "command": {
+            "program": "/profiles/pl/whisper.sh"
+        },
+        "remote": {
+            "url": "http://192.168.0.164:5020/inference"
+        },
+        "satellite_site_ids": "pi-voice,mobile,office,bedroom",
+        "system": "command"
+    },
+    "text_to_speech": {
+        "espeak": {
+            "voice": "pl",
+            "volume": "1"
+        },
+        "flite": {
+            "voice": "slt"
+        },
+        "marytts": {
+            "url": "http://host.docker.internal:59125/process",
+            "voice": "pl_PL-gosia-medium"
+        },
+        "nanotts": {
+            "language": "en-US"
+        },
+        "picotts": {
+            "language": "en-US"
+        },
+        "satellite_site_ids": "office,mobile,bedroom",
+        "system": "wavenet",
+        "wavenet": {
+            "cache_dir": "/profiles/pl/tts/googlewavenet/cache",
+            "credentials_json": "/profiles/pl/tts/googlewavenet/credentials.json",
+            "voice": "pl-PL-Wavenet-E"
+        }
+    },
+    "wake": {
+        "porcupine": {
+            "keyword_path": "ok google_raspberry-pi.ppn",
+            "sensitivity": "0.7",
+            "udp_audio": "12101"
+        },
+        "raven": {
+            "average_templates": false,
+            "keywords": {
+                "Ayla Jabbra": {
+                    "enabled": true
+                },
+                "Ayla Jabbra Magda": {
+                    "enabled": true
+                },
+                "Ayla mix": {
+                    "enabled": false
+                },
+                "eyva dawid": {
+                    "enabled": false
+                }
+            },
+            "minimum_matches": "1",
+            "probability_threshold": "0.49",
+            "udp_audio": "",
+            "vad_sensitivity": "1"
+        },
+        "satellite_site_ids": "office,mobile",
+        "system": "hermes"
+    }
+}

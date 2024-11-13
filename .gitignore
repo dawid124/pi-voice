@@ -1,0 +1,21 @@
+# Secrets & credentials
+.env
+rhasspy/profiles/pl/tts/googlewavenet/credentials.json
+rhasspy/profiles/pl/googleTts.sh
+rhasspy/profiles/pl/whisper.openai.sh
+
+# IDE
+.idea/
+
+# Large binary / generated data
+data/
+*.onnx
+*.pbmm
+*.tflite
+*.binary
+scorer
+
+# Logs & runtime
+*.log
+*.pid
+*.wav
